@@ -18,7 +18,7 @@ another xml config example:
  <Subsystem Name="Data Collection">
   <Group Name="Virtual Wedge">
    <Field Name="Virtual wedge">1</Field>
-   <Field Name="Grid">&lt;CDEF&gt;\Windows\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\n</Field>
+   <Field Name="Grid">&lt;CDEF&gt;\Windows\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\t@\n</Field>
   </Group>
  </Subsystem>
 </DevInfo>
