@@ -2,40 +2,39 @@
     DYNAMIC LINK LIBRARY : Grid_TimeStamp Project Overview
 ========================================================================
 
-AppWizard has created this Grid_TimeStamp DLL for you.  
+= Usage =
 
-This file contains a summary of what you will find in each of the files that
-make up your Grid_TimeStamp application.
+Use this DLL in an Intermec Device at IntermecSettings-DataCollection-VirtualWedge-GRID
 
+An example entry:
 
-Grid_TimeStamp.vcproj
-    This is the main project file for VC++ projects generated using an Application Wizard. 
-    It contains information about the version of Visual C++ that generated the file, and 
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+<code>
+<CDEF>\Grid_TimeStamp.DLL|TimeStamp|Compile|\t@\t@\n
+</code>
 
-Grid_TimeStamp.cpp
-    This is the main DLL source file.
+another xml config example:
 
-	When created, this DLL does not export any symbols. As a result, it  
-	will not produce a .lib file when it is built. If you wish this project 
-	to be a project dependency of some other project, you will either need to 
-	add code to export some symbols from the DLL so that an export library 
-	will be produced, or you can set the Ignore Input Library property to Yes 
-	on the General propert page of the Linker folder in the project's Property 
-	Pages dialog box.
+<code>
+<?xml version="1.0" encoding="UTF-8"?>
+<DevInfo Action="Set" Persist="true" SeqNo="264">
+ <Subsystem Name="Data Collection">
+  <Group Name="Virtual Wedge">
+   <Field Name="Virtual wedge">1</Field>
+   <Field Name="Grid">&lt;CDEF&gt;\Windows\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\n</Field>
+  </Group>
+ </Subsystem>
+</DevInfo>
+</code>
+
+You specify up to three elements behind "Compile". The parts have to be seprated by "@". 
+The first of three parts will be used as separator for date and time. The second of 
+three parts will be used as separator between the time stamp and the barcode data. The 
+third part will be used as string sent after the barcode data.
+
+You can also specify only one or two parts. The last part is always the postamble 
+and the previous part, if any, as separator between time stamp and barcode data.
+
+You can use \r, \n and \t inside the parts. They will be translated to there ASCII 
+values for TAB, CarriageReturn and NewLine.
 
 /////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named Grid_TimeStamp.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////s
