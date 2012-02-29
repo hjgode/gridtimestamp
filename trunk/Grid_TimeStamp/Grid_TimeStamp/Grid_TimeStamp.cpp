@@ -135,13 +135,13 @@ ITCFILTER_API Compile( LPCWSTR szInput ){
 				wsprintf(s_szPostamble, sTokens[0]);
 				break;
 			case 2:
-				wsprintf(s_szPostamble, sTokens[0]);
-				wsprintf(s_szSeparator, sTokens[1]);
+				wsprintf(s_szPostamble, sTokens[1]);
+				wsprintf(s_szSeparator, sTokens[0]);
 				break;
 			case 3:
-				wsprintf(s_szPostamble, sTokens[0]);
+				wsprintf(s_szPostamble, sTokens[2]);
 				wsprintf(s_szSeparator, sTokens[1]);
-				wsprintf(s_szDateTimeSeparator, sTokens[2]);
+				wsprintf(s_szDateTimeSeparator, sTokens[0]);
 				break;
 			default://more tokens?, only first 3 will be used
 				wsprintf(s_szPostamble, sTokens[0]);
@@ -211,7 +211,7 @@ ITCFILTER_API TimeStamp (
 		if(nLen2!=0)
 			wsprintf(sTimeStamp, L"%s", pszTime);
 		if(nLen>0 && nLen2>0)
-			wsprintf(sTimeStamp, L"%s %s", pszDate, pszTime);
+			wsprintf(sTimeStamp, L"%s%s%s", pszDate, s_szDateTimeSeparator ,pszTime);
 		else
 			wsprintf(sTimeStamp, L"%04i%02i%02i%s%02i:%02i:%02i", 
 				sysTime.wYear, sysTime.wMonth, sysTime.wDay,
