@@ -30,6 +30,7 @@ void CTestDLLDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_Postamble, CEdit_POST);
 	DDX_Control(pDX, IDC_EDIT_OUT, CEdit_Out);
 	DDX_Control(pDX, IDC_EDIT_DATETIMESEP, CEdit_DateTimeSep);
+	DDX_Control(pDX, IDC_EDIT_DATETIMESEP, CEdit_DateTimeSep);
 }
 
 BEGIN_MESSAGE_MAP(CTestDLLDlg, CDialog)

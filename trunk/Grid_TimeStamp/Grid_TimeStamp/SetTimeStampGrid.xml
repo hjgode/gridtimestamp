@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DevInfo Action="Set" Persist="true" SeqNo="264">
+  <Subsystem Name="Data Collection">
+    <Group Name="Virtual Wedge">
+      <Field Name="Virtual wedge">1</Field>
+      <!-- {kxHH} is not supported by CK3 -->
+      <Field Name="Grid">&lt;CDEF&gt;\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\t@\r</Field>
+    </Group>
+  </Subsystem>
+</DevInfo>

@@ -9,7 +9,7 @@ Use this DLL in an Intermec Device at IntermecSettings-DataCollection-VirtualWed
 An example entry:
 
 <code>
-<CDEF>\Grid_TimeStamp.DLL|TimeStamp|Compile|\t@\t@\n
+<CDEF>\Grid_TimeStamp.DLL|TimeStamp|Compile|\t@\t@\t@\n
 </code>
 
 another xml config example:
@@ -20,7 +20,7 @@ another xml config example:
  <Subsystem Name="Data Collection">
   <Group Name="Virtual Wedge">
    <Field Name="Virtual wedge">1</Field>
-   <Field Name="Grid">&lt;CDEF&gt;\Windows\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\n</Field>
+   <Field Name="Grid">&lt;CDEF&gt;\Windows\Grid_TimeStamp.dll|TimeStamp|Compile|\t@\t@\n</Field>
   </Group>
  </Subsystem>
 </DevInfo>
