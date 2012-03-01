@@ -12,17 +12,6 @@
 #define ITCFILTER_SUCCESS S_OK
 #endif
 
-static TCHAR* asciiTable[] = { 
-	L"\x00",L"\x01",L"\x02",L"\x03",
-	L"\x04",L"\x05",L"\x06",L"\x09",
-	L"\x0A",L"\x0B",L"\x0C",L"\x0D",
-	L"\x0E",L"\x0F",L"\x10",L"\x11",
-	L"\x12",L"\x13",L"\x14",L"\x15",
-	L"\x16",L"\x17",L"\x18",L"\x19",
-	L"\x1A",L"\x1B",L"\x1C",L"\x1D",
-	L"\x1E",L"\x1F",
-};
-
 void myReplace(std::wstring& str, const std::wstring& oldStr, const std::wstring& newStr)
 {
   size_t pos = 0;
@@ -144,9 +133,9 @@ ITCFILTER_API Compile( LPCWSTR szInput ){
 				wsprintf(s_szDateTimeSeparator, sTokens[0]);
 				break;
 			default://more tokens?, only first 3 will be used
-				wsprintf(s_szPostamble, sTokens[0]);
+				wsprintf(s_szPostamble, sTokens[2]);
 				wsprintf(s_szSeparator, sTokens[1]);
-				wsprintf(s_szDateTimeSeparator, sTokens[2]);
+				wsprintf(s_szDateTimeSeparator, sTokens[0]);
 				break;
 		}
 	}
@@ -180,6 +169,9 @@ ITCFILTER_API TimeStamp (
 		TCHAR* sTimeStamp = new TCHAR[18];
 		SYSTEMTIME sysTime;
 		GetLocalTime(&sysTime);
+		TCHAR* pszInput = new TCHAR[nInputChars+1];
+		memset (pszInput, 0 , sizeof(TCHAR)*(nInputChars + 1));
+		wcsncpy(pszInput, szInput, nInputChars);
 
 		//format datetime to 'YYYYMMDD hh:mm:ss'
 #ifdef USE_GETTIMEDATE_API
@@ -187,7 +179,7 @@ ITCFILTER_API TimeStamp (
 		TCHAR* pszTimeFormat = L"HH:mm:ss";
 		TCHAR* pszDate = new TCHAR[64];
 		TCHAR* pszTime = new TCHAR[64];
-
+		
 		LCID lc = LOCALE_USER_DEFAULT;
 		int nLen = 64;
 		int nLen2 = 64;
@@ -223,7 +215,7 @@ ITCFILTER_API TimeStamp (
 			s_szDateTimeSeparator,
 			sysTime.wHour, sysTime.wMinute, sysTime.wSecond);
 #endif
-		DWORD nCharsNeeded = wcslen(sTimeStamp) + wcslen(s_szSeparator) + nInputChars + wcslen(s_szPostamble);
+		DWORD nCharsNeeded = wcslen(sTimeStamp) + wcslen(s_szSeparator) + wcslen(pszInput) + wcslen(s_szPostamble);
         // First check again to make sure we're provided enough space
         if( nCharsNeeded > *pnOutputChars )
         {
@@ -233,12 +225,13 @@ ITCFILTER_API TimeStamp (
         else
         {
 			memset(szOutputBuffer, 0, *pnOutputChars);
-			wsprintf(szOutputBuffer, L"%s%s%s%s", sTimeStamp, s_szSeparator, szInput, s_szPostamble);
+			wsprintf(szOutputBuffer, L"%s%s%s%s", sTimeStamp, s_szSeparator, pszInput, s_szPostamble);
 		}
 		*pnOutputChars = nCharsNeeded;
 #ifdef USE_GETTIMEDATE_API
 		delete pszDate;
 		delete pszTime;
 #endif
+		delete pszInput;
 		return hr;
 	}
